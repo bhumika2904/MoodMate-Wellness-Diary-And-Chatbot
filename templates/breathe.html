@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>🧘‍♀️ Guided Breathing</h2>
+<p>Follow the instructions below for a calm 1-minute session.</p>
+
+<div id="breath-instruction">Starting in 3...</div>
+<p id="timer">60</p>
+
+<style>
+  #breath-instruction {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 30px;
+    animation: fade 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes fade {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+  }
+
+  #timer {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #666;
+  }
+</style>
+
+<script>
+  const steps = [
+    { text: "Breathe in…", duration: 4000 },
+    { text: "Hold…", duration: 3000 },
+    { text: "Breathe out…", duration: 4000 },
+    { text: "Hold…", duration: 3000 }
+  ];
+
+  const instructionEl = document.getElementById("breath-instruction");
+  const timerEl = document.getElementById("timer");
+  let timeLeft = 60;
+  let stepIndex = 0;
+
+  function updateInstruction() {
+    const step = steps[stepIndex];
+    instructionEl.textContent = step.text;
+
+    setTimeout(() => {
+      stepIndex = (stepIndex + 1) % steps.length;
+      if (timeLeft > 0) updateInstruction();
+    }, step.duration);
+  }
+
+  function countdown() {
+    const interval = setInterval(() => {
+      timeLeft--;
+      timerEl.textContent = timeLeft;
+      if (timeLeft === 0) {
+        clearInterval(interval);
+        instructionEl.textContent = "Well done! 🎉";
+      }
+    }, 1000);
+  }
+
+  // Start everything after 3-second delay
+  setTimeout(() => {
+    updateInstruction();
+    countdown();
+  }, 3000);
+</script>
+{% endblock %}

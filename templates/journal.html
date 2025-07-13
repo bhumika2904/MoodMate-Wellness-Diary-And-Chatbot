@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Journal</h2>
+
+  <!-- Mood Picker -->
+  <label for="mood">Your Mood:</label>
+  <select id="mood">
+    <option value="😊">😊 Happy</option>
+    <option value="😔">😔 Sad</option>
+    <option value="😠">😠 Angry</option>
+    <option value="😨">😨 Anxious</option>
+    <option value="😌">😌 Calm</option>
+  </select>
+
+  <!-- Journal Textbox -->
+  <textarea id="journal-entry" placeholder="Write your thoughts..."></textarea>
+
+  <!-- Save Button -->
+  <button id="save-journal">Save Journal</button>
+
+  <!-- Save Confirmation -->
+  <div id="save-status" style="margin-top: 10px;"></div>
+
+  <!-- 🔽 JavaScript Goes Here -->
+  <script>
+    document.getElementById("save-journal").addEventListener("click", function () {
+      const journalText = document.getElementById("journal-entry").value;
+      const mood = document.getElementById("mood").value;
+
+      fetch("/save_journal", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "entry=" + encodeURIComponent(journalText) + "&mood=" + encodeURIComponent(mood)
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("save-status").innerText = data.message;
+        document.getElementById("journal-entry").value = "";
+      });
+    });
+  </script>
+
+{% endblock %}

@@ -1,0 +1,221 @@
+/* Reset + Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #e8f0fe;
+  padding: 40px 20px;
+}
+
+/* Main layout */
+.main-container {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Chatbot + Journal box */
+.column {
+  flex: 1 1 400px;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2b6777;
+}
+
+/* Chat/journal display area */
+.box {
+  height: 300px;
+  overflow-y: auto;
+  background: #f7f9fc;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+/* Input + buttons */
+.input-area {
+  display: flex;
+  gap: 10px;
+}
+
+input[type="text"], textarea {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #2b6777;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: #1e4e5f;
+}
+
+/* Save status text */
+#save-status {
+  margin-top: 5px;
+  font-size: 14px;
+  color: green;
+  text-align: center;
+}
+
+
+
+/* Navigation bar */
+nav {
+  background: #2b6777;
+  padding: 15px 30px;
+  color: white;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Page layout */
+.page-content {
+  max-width: 800px;
+  margin: 30px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat & journal boxes */
+.box {
+  height: 300px;
+  overflow-y: auto;
+  background: #f7f9fc;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #2b6777;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+.journal-list {
+  list-style: none;
+  padding: 0;
+}
+
+.journal-list li {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 5px solid #2b6777;
+}
+
+.timestamp {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.entry {
+  font-size: 15px;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark-mode textarea,
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #444;
+}
+
+body.dark-mode button {
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+body.dark-mode .entry {
+  background-color: #1e1e1e;
+  color: #ddd;
+  border-left: 5px solid #888;
+}

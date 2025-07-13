@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>📘 Your Previous Journal Entries</h2>
+  {% if entries %}
+    <ul class="journal-list">
+      {% for entry, mood, timestamp in entries %}
+  <li>
+    <div class="timestamp">{{ timestamp }} — <strong>{{ mood }}</strong></div>
+    <div class="entry">{{ entry }}</div>
+  </li>
+{% endfor %}
+
+    </ul>
+  {% else %}
+    <p>No journal entries found yet.</p>
+  {% endif %}
+{% endblock %}

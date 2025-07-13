@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mental Health Support</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <h1>MentalCare 🧠</h1>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/chatbot">Chatbot</a></li>
+        <li><a href="/journal">Journal</a></li>
+        <li><a href="/journal/entries">Entries</a></li>
+        <li><a href="/mood-stats">Mood Stats</a></li>
+         <li><a href="/breathe">Breathing</a></li>
+         <li><button id="theme-toggle" style="margin-left: 20px;">🌙</button></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-content">
+    {% block content %}{% endblock %}
+  </div>
+  <script>
+  // Theme toggle logic
+  const toggleBtn = document.getElementById("theme-toggle");
+  const currentTheme = localStorage.getItem("theme");
+
+  if (currentTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    toggleBtn.textContent = "☀️";
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    const newTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+    localStorage.setItem("theme", newTheme);
+    toggleBtn.textContent = newTheme === "dark" ? "☀️" : "🌙";
+  });
+</script>
+
+</body>
+</html>
