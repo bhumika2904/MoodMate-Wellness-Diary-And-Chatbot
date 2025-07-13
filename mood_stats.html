@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>📊 Mood Analytics Dashboard</h2>
+
+<canvas id="pieChart" width="400" height="300"></canvas>
+<canvas id="lineChart" width="400" height="300"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Prepare pie chart data
+  const moodData = {{ mood_counts|tojson }};
+  const pieLabels = moodData.map(item => item[0]);
+  const pieValues = moodData.map(item => item[1]);
+
+  new Chart(document.getElementById("pieChart"), {
+    type: 'pie',
+    data: {
+      labels: pieLabels,
+      datasets: [{
+        label: "Mood Frequency",
+        data: pieValues,
+        backgroundColor: ['#F94144', '#F3722C', '#F9C74F', '#90BE6D', '#577590'],
+      }]
+    }
+  });
+
+  // Prepare line chart data
+  const rawLineData = {{ mood_by_day|tojson }};
+  const grouped = {};
+
+  rawLineData.forEach(([date, mood, count]) => {
+    if (!grouped[mood]) grouped[mood] = {};
+    grouped[mood][date] = count;
+  });
+
+  const dates = [...new Set(rawLineData.map(item => item[0]))].sort();
+
+  const datasets = Object.keys(grouped).map(mood => {
+    return {
+      label: mood,
+      data: dates.map(date => grouped[mood][date] || 0),
+      fill: false,
+      borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+      tension: 0.3
+    };
+  });
+
+  new Chart(document.getElementById("lineChart"), {
+    type: 'line',
+    data: {
+      labels: dates,
+      datasets: datasets
+    }
+  });
+</script>
+{% endblock %}
